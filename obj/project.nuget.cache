@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "sm63O/cZErkvgMf4QWdxB38O5G+pMQFcoU/jlJkHSfaIQnCGBNXrRDEGDbijuS8kAsbRihk51of/VH07mErHjw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\gkjus\\Desktop\\VLOBOARDS-PROD\\VLO-BOARDS\\vlo-boards-api\\vlo-boards-api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gkjus\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\gkjus\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\gkjus\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\gkjus\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\gkjus\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\gkjus\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
