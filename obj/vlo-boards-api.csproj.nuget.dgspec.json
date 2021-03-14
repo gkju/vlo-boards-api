@@ -40,9 +40,17 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.4, )"
+            },
+            "Minio": {
+              "target": "Package",
+              "version": "[3.1.13, )"
             }
           },
           "imports": [
@@ -143,6 +151,10 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[6.8.0, )"
+            },
+            "Minio": {
+              "target": "Package",
+              "version": "[3.1.13, )"
             },
             "Npgsql": {
               "target": "Package",
