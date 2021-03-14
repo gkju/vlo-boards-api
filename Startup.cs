@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AccountsData.Data;
 using AccountsData.Models.DataModels;
@@ -35,8 +36,13 @@ namespace vlo_boards_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var authAuthority = Configuration.GetSection("Auth:Authority").Get<string>();
+            var authAudience = Configuration.GetSection("Auth:Audience").Get<string>();
+            var authSecret = Configuration.GetSection("Auth:Secret").Get<string>();
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("NPGSQL")));
+                options.UseNpgsql(Configuration.GetConnectionString("NPGSQL"), sql => sql.MigrationsAssembly(migrationsAssembly)));
             
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -57,8 +63,8 @@ namespace vlo_boards_api
             services.AddAuthentication("token")
                 .AddJwtBearer("token", options =>
                 {
-                    options.Authority = Configuration.GetSection("Auth:Authority").Get<string>();
-                    options.Audience = Configuration.GetSection("Auth:Audience").Get<string>();
+                    options.Authority = authAuthority;
+                    options.Audience = authAudience;
 
                     options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
 
@@ -67,10 +73,10 @@ namespace vlo_boards_api
                 })
                 .AddOAuth2Introspection("introspection", options =>
                 {
-                    options.Authority = Configuration.GetSection("Auth:Authority").Get<string>();;
+                    options.Authority = authAuthority;
 
-                    options.ClientId =  Configuration.GetSection("Auth:Audience").Get<string>();
-                    options.ClientSecret = Configuration.GetSection("Auth:Secret").Get<string>();
+                    options.ClientId =  authAudience;
+                    options.ClientSecret = authSecret;
                 });
             
             services.AddAuthorization(options =>
