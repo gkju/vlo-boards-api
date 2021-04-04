@@ -52,8 +52,7 @@ namespace vlo_boards_api.Controllers
             
         }
         
-        //rip rest
-        [HttpPost]
+        [HttpGet]
         [Route("GetFile")]
         public async Task<IActionResult> GetFile(string id)
         {
