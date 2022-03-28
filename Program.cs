@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace vlo_boards_api
+namespace AccountsData.Models.DataModels
 {
     public class Program
     {

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AccountsData.Data;
 using AccountsData.Models.DataModels;
+using Amazon.S3;
 using IdentityModel.AspNetCore.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,7 +24,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using Minio;
 
-namespace vlo_boards_api
+namespace AccountsData.Models.DataModels
 {
     public class Startup
     {
@@ -47,7 +48,10 @@ namespace vlo_boards_api
                 minioSecret = "",
                 minioAccessToken = "",
                 bucketName = "boards",
-                appDbCS = "";
+                videoBucketName = "video",
+                appDbCS = "",
+                clamHost = "",
+                clamPort = "";
             List<string> corsorigins = new List<string>();
             if (env.IsDevelopment())
             {
@@ -62,27 +66,30 @@ namespace vlo_boards_api
                 
                 appDbCS = Configuration.GetConnectionString("NPGSQL");
                 corsorigins = new List<string> {"http://localhost:44328", "https://localhost:44328", "http://localhost:3000", "https://localhost:3000"};
+
+                clamHost = Configuration["Clam:Host"];
+                clamPort = Configuration["Clam:Port"];
             }
 
-            services.AddTransient<MinioConfig>(o => new MinioConfig {BucketName = bucketName});
+            services.AddTransient(o => new MinioConfig {BucketName = bucketName, VideoBucketName = videoBucketName});
+            services.AddTransient(o => new ClamConfig {Host = clamHost, Port = Int32.Parse(clamPort)});
 
-            services.AddTransient<MinioClient>((o) =>
+            var s3config = new AmazonS3Config()
             {
-                MinioClient minioClient;
-                if (env.IsDevelopment())
-                {
-                    minioClient = new MinioClient(minioEndpoint, minioAccessToken, minioSecret);
-                }
-                else
-                {
-                    minioClient = new MinioClient(minioEndpoint, minioAccessToken, minioSecret).WithSSL();
-                }
-
-                return minioClient;
-            });
+                AuthenticationRegion = MinioConfig.AuthenticationRegion,
+                ServiceURL = minioEndpoint,
+                ForcePathStyle = true
+            };
             
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(appDbCS, sql => sql.MigrationsAssembly(migrationsAssembly)));
+            services.AddTransient((o) => new AmazonS3Client(minioAccessToken, minioSecret, s3config));
+
+            services.AddScoped<FileInterceptor>();
+            
+            services.AddDbContext<ApplicationDbContext>((sp, options) =>
+            {
+                options.AddInterceptors(sp.GetRequiredService<FileInterceptor>());
+                options.UseNpgsql(appDbCS, sql => sql.MigrationsAssembly(migrationsAssembly))
+            });
             
             services.AddControllers();
             services.AddSwaggerGen(c =>

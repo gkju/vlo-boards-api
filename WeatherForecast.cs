@@ -1,6 +1,6 @@
 using System;
 
-namespace vlo_boards_api
+namespace AccountsData.Models.DataModels
 {
     public class WeatherForecast
     {

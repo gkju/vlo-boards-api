@@ -7,26 +7,32 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AWSSDK.S3" Version="3.7.8.12" />
         <PackageReference Include="IdentityModel" Version="6.0.0" />
-        <PackageReference Include="IdentityModel.AspNetCore" Version="4.1.2" />
+        <PackageReference Include="IdentityModel.AspNetCore" Version="4.1.3" />
         <PackageReference Include="IdentityModel.AspNetCore.AccessTokenValidation" Version="1.0.0-preview.3" />
         <PackageReference Include="IdentityModel.AspNetCore.OAuth2Introspection" Version="6.0.0" />
         <PackageReference Include="IdentityModel.AspNetCore.ScopeValidation" Version="1.1.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.1" />
-        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.15.0" />
-        <PackageReference Include="Minio" Version="3.1.13" />
-        <PackageReference Include="Npgsql" Version="6.0.2" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.2" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="2.0.0-preview1" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.3" />
+        <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.3" />
+        <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.3" />
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.16.0" />
+        <PackageReference Include="nClam" Version="7.0.0" />
+        <PackageReference Include="Npgsql" Version="6.0.3" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.3" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\AccountsData\AccountsData.csproj" />
+      <ProjectReference Include="..\VLO-ACCOUNTS\VLO-ACCOUNTS.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Controllers" />
     </ItemGroup>
 
 </Project>
