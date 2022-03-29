@@ -12,17 +12,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Microsoft.IdentityModel.Tokens;
-using Minio;
 
 namespace AccountsData.Models.DataModels
 {
@@ -88,7 +83,7 @@ namespace AccountsData.Models.DataModels
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
                 options.AddInterceptors(sp.GetRequiredService<FileInterceptor>());
-                options.UseNpgsql(appDbCS, sql => sql.MigrationsAssembly(migrationsAssembly))
+                options.UseNpgsql(appDbCS, sql => sql.MigrationsAssembly(migrationsAssembly));
             });
             
             services.AddControllers();
